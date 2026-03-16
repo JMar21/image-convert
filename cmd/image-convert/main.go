@@ -24,12 +24,22 @@ func main() {
 	for _, arg := range args {
 		fmt.Println(arg)
 	}
-	if from == "jpg" && to == "png" {
+	switch {
+	case from == "png" && to == "jpg":
+		err := conv.ConvertPNGToJPG(path)
+		if err != nil {
+			fmt.Printf("Error converting image: %v\n", err)
+		} else {
+			fmt.Println("Image converted successfully.")
+		}
+	case from == "jpg" && to == "png":
 		err := conv.ConvertJPGToPNG(path)
 		if err != nil {
 			fmt.Printf("Error converting image: %v\n", err)
 		} else {
 			fmt.Println("Image converted successfully.")
 		}
+	default:
+		fmt.Println("Invalid file type. Use 'png' to 'jpg' or 'jpg' to 'png'.")
 	}
 }
